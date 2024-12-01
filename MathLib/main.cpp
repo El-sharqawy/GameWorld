@@ -3,6 +3,8 @@
 #include "utils.h"
 #include "matrix.h"
 
+#include <glm/glm.hpp>
+
 int main()
 {
 	SRANDOM;
@@ -24,6 +26,7 @@ int main()
 	CMatrix4Df inverseMatrix{};
 	inverseMatrix = mat4.InverseGJ(mat4);
 
+	glm::perspectiveFovLH();
 	printf("_________________________\n");
 	for (int i = 0; i < 4; i++)
 		printf("%f %f %f %f\n", mat4.mat4[i][0], mat4.mat4[i][1], mat4.mat4[i][2], mat4.mat4[i][3]);

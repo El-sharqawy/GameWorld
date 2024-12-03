@@ -3,12 +3,24 @@
 #include "utils.h"
 #include "matrix.h"
 
+#include "../LibOpenGL/source/stb_image.h"
+
 #include <glm/glm.hpp>
+
+#if defined(_DEBUG)
+#pragma comment(lib, "LibOpenGL_d")
+#else
+#pragma comment(lib, "LibOpenGL")
+#endif
 
 int main()
 {
 	SRANDOM;
 	
+	int width, height, nrChannels;
+	unsigned char* data = stbi_load("Metin2", &width, &height, &nrChannels, 0);
+	stbi_image_free(data);
+
 	glm::mat4 matrix = glm::mat4(
 		4.0f, 7.0f, 2.0f, 3.0f,
 		3.0f, 6.0f, 1.0f, 4.0f,
@@ -26,7 +38,6 @@ int main()
 	CMatrix4Df inverseMatrix{};
 	inverseMatrix = mat4.InverseGJ(mat4);
 
-	glm::perspectiveFovLH();
 	printf("_________________________\n");
 	for (int i = 0; i < 4; i++)
 		printf("%f %f %f %f\n", mat4.mat4[i][0], mat4.mat4[i][1], mat4.mat4[i][2], mat4.mat4[i][3]);
